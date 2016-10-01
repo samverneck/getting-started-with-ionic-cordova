@@ -6,9 +6,15 @@ angular.module('App')
     templateUrl: 'views/places/places.html'
   });
 })
-.controller('PlacesController', function($http, $scope, $ionicLoading, $ionicHistory, Geolocation, Types) {
+.controller('PlacesController', function($http, $scope, $ionicLoading, $ionicHistory, $state, Geolocation, Types) {
   var vm = this;
-  var base = 'https://civinfo-apis.herokuapp.com/civic/places?location=' + Geolocation.geometry.location.lat + ',' + Geolocation.geometry.location.lng;
+
+  if (!Geolocation.data.geometry || !Geolocation.data.geometry.location) {
+    $state.go('location');
+    return;
+  }
+
+  var base = 'https://civinfo-apis.herokuapp.com/civic/places?location=' + Geolocation.data.geometry.location.lat + ',' + Geolocation.data.geometry.location.lng;
   var token = '';
   vm.canLoad = true;
   vm.places = [];

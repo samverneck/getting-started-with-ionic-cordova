@@ -1,4 +1,4 @@
-angular.module('App', ['ionic'])
+angular.module('App', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -13,14 +13,7 @@ angular.module('App', ['ionic'])
 
 .factory('Geolocation', function() {
   return {
-    "formatted_address": "Chicago, IL, USA",
-    "geometry": {
-      "location": {
-        "lat": 41.8781136,
-        "lng": -87.6297982
-      }
-    },
-    "place_id": "ChIJ7cv00DwsDogRAMDACa2m4K8"
+    data: {}
   };
 })
 
@@ -34,5 +27,5 @@ angular.module('App', ['ionic'])
 })
 
 .config(function($urlRouterProvider) {
-  $urlRouterProvider.otherwise('/places');
+  $urlRouterProvider.otherwise('/location');
 })
